@@ -20,11 +20,11 @@ import pandas as pd
 ### Setup
 ###
 ################################################################################
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY, 'criddyp.css', 'custom.css'], title='Data Monger', update_title=None, prevent_initial_callbacks=True)
+app = dash.Dash(__name__, external_stylesheets=['bootstrap.css', 'criddyp.css', 'custom.css'], title='Data Monger', update_title=None, prevent_initial_callbacks=True)
 app.config.suppress_callback_exceptions = True
-print('open1')
+
 # Globals
-global data_1main
+global data_1
 global data_2
 global data_merged
 
@@ -144,6 +144,7 @@ app.layout =  html.Div([
                             [
                                 html.H4('Col Logic', className='heading'),
                                 dbc.Button("Add Join Col", id="b_add_col_match",n_clicks=0, className='b_add_col'),
+                                dbc.Button("Refresh", id="b_refresh_col_match",n_clicks=0, className='b_add_col'),
                             ],
                         ),
                         dbc.CardBody(
@@ -224,6 +225,11 @@ def parse_stats(df):
     # fill blank cells with 0
     df = df.fillna(0)
     children = []
+
+    # add num rows and cols
+    children.append(html.P('Rows: ' + "{:,}".format(df.shape[0])))
+    children.append(html.P('Cols: ' + "{:,}".format(df.shape[1])))
+    
     # iterate col names and data
     for (name, data) in df.iteritems():
         try:
@@ -303,9 +309,8 @@ def update_output(contents, filename):
     Output('col_match_input', 'children'),
     [
         Input('b_add_col_match', 'n_clicks'),
+        Input('b_refresh_col_match', 'n_clicks'),
         Input({'type': 'b_del_col', 'index': ALL}, 'n_clicks'),
-        Input('upload-data-1', 'filename'),
-        Input('upload-data-2', 'filename')
     ],
     [
         State('col_match_input', 'children'),
@@ -313,8 +318,8 @@ def update_output(contents, filename):
         State({"index": ALL, "type": "dropdown_col_2"}, "value"),
     ],
     prevent_initial_call=True)
-def display_dropdowns(b_add_n_clicks, b_del_n_clicks, data1, data2, children, col1, col2):
-    # Find which element triggered the callabck (add or del)
+def display_dropdowns(b_add_n_clicks, b_refresh_n_clicks, b_del_n_clicks, children, col1, col2):
+    # Find which element triggered the callback (add or del)
     triggered = [p['prop_id'].split('.')[0] for p in dash.callback_context.triggered]
     if triggered == 'upload-data-1':
         pass
@@ -473,7 +478,7 @@ def func(n_clicks):
     # make sure correct trigger
     if 'b_download' in triggered:
         global data_merged
-        return dcc.send_data_frame(data_merged.to_csv(index = False), "data_transform.csv")
+        return dcc.send_data_frame(data_merged.to_csv, filename='merged.csv', index=False)
 
     # Row and col count
 
@@ -483,6 +488,5 @@ def func(n_clicks):
 ###
 ################################################################################
 if __name__ == '__main__':
-    print('open2')
     webbrowser.open('http://localhost:8080/')
     app.run_server(debug=False, port=8080, host='localhost')
