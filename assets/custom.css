@@ -1,0 +1,174 @@
+html, body {
+    background-color: rgb(56, 56, 56);
+    color: white;
+    min-height: 100vh;
+    max-width: 100% !important;
+    overflow-x: hidden;
+}
+.title{
+    font-size: 50px;
+    text-align: center;
+    color: azure;
+}
+
+.card_data_table{
+    min-width: 90%;
+    max-width: 90%;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    min-height: 45rem;
+    font-size: small;
+    white-space: normal;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.card_transform_type{
+    height: 30rem;
+    width: 90%;
+    margin-top: 5rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.card_col_logic{
+    width: 90%;
+    margin-top: 5rem;
+    max-height: 30rem;
+    height: 30rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.data_table_preview{
+    height: 27rem;
+    font-size: small;
+    white-space: normal;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.data_table_preview_merged{
+    height: 40rem;
+    font-size: small;
+    white-space: normal;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.card_footer_stats{
+
+}
+
+.card_data_table_merged{
+    min-width: 94.5%;
+    max-width: 94.5%;
+    width: 94.5%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    min-height: 45rem;
+    font-size: small;
+    white-space: normal;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.col_match_container{
+    height: 10rem;
+    overflow-y: auto;
+}
+
+.b_upload{
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    height: 60px;
+    line-height: 60px;
+    border-width: 1px;
+    border-style: dashed;
+    border-radius: 5px;
+    text-align: center;
+    background-color: rgba(0, 16, 226, 0.503);
+}
+
+.join-list{
+    width: 90%;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: large;
+}
+
+.b_add_col{
+    width: 33%;
+    margin-left: auto;
+    margin-right: auto;
+    float:right;
+    background-color: rgba(0, 16, 226, 0.503);
+    margin-top: 1rem;
+    color: white;
+}
+
+.b_submit{
+    width: 50%;
+    height: 10rem;
+    font-size: large;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background-color: rgba(0, 16, 226, 0.503);
+    margin-top: 5rem;
+    /* border-width: 1px; */
+    color: white;
+}
+
+.b_download{
+    width: 25%;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    display: block;
+    background-color: rgba(0, 16, 226, 0.503);
+    margin-top: 10px;
+    border-width: 1px;
+    color: white;
+}
+
+.col_selection{
+
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.col_dropdown{
+    float:left;
+    color:black;
+    width: 35%;
+    margin-right: auto;
+    margin-left: 5%;
+    margin-top: 1rem;
+}
+
+.heading{
+    margin-left: 5%;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    /* float: left; */
+    display: inline-block;
+    width:35%;
+}
+
+.b_del_col{
+    float:left;
+    color:white;
+    background-color: rgba(0, 16, 226, 0.503);
+    margin-right: auto;
+    margin-left: 3%;
+    margin-top: 1rem;
+}
