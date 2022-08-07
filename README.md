@@ -14,5 +14,5 @@ python main.py
 A .exe is great to package and move your program around. 
 
 ```
-pyinstaller (--onefile or onedir) -y --clean --debug=all --add-data="assets;assets" --hidden-import=dash --hidden-import=pandas main.py
+pyinstaller --onedir (--onefile) -y --clean --add-data="assets;assets" --hidden-import=dash --hidden-import=pandas --exclude-module PIL --exclude-module scipy --exclude-module matplotlib --exclude-module skimage --exclude-module tk main.py
 ```

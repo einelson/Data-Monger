@@ -207,8 +207,7 @@ def parse_contents(contents, filename):
     try:
         if 'csv' in filename:
             # Assume that the user uploaded a CSV file
-            df = pd.read_csv(
-                io.StringIO(decoded.decode('utf-8')))
+            df = pd.read_csv(io.StringIO(decoded.decode('utf-8')), low_memory=False)
         elif 'xls' in filename:
             # Assume that the user uploaded an excel file
             df = pd.read_excel(io.BytesIO(decoded))
@@ -426,13 +425,31 @@ def merge_data(n, join_type, dropdown_1, dropdown_2):
         
         # check if join type is union (only one with different context)
         if join_type == 'union':
-            data_merged = pd.concat([data_1, data_2])
+                # rename cols in dataset2 to match dataset 1 col names
+            if dropdown_1 != [] and dropdown_2 != []:
+                temp = data_2
+                for index,name in enumerate(dropdown_1):
+                    # If spot left blank
+                    if dropdown_1[index] is None or dropdown_2[index] is None:
+                        pass
+                    else:
+                        print(index)
+                        print(name)
+                        print(dropdown_2[index])
+                        temp = temp.rename(columns={dropdown_2[index]:name})
+
+                data_merged = pd.concat([data_1, temp])
+            # if no union col change logic
+            else:
+                data_merged = pd.concat([data_1, data_2])
+            
+            # return data table
             return dash_table.DataTable(
-				columns=[{"name": i, "id": i} for i in data_merged.columns],
-				data=data_merged.to_dict("rows"),
+                columns=[{"name": i, "id": i} for i in data_merged.columns],
+                data=data_merged.to_dict("rows"),
                 # fixed_rows={'headers': True, 'data': 0},
-				style_cell={'color': 'black',
-				'textAlign': 'left',},
+                style_cell={'color': 'black',
+                'textAlign': 'left',},
                 ), {'display': 'block'}, parse_stats(data_merged)
 
         # special rules for cross join
